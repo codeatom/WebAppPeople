@@ -1,0 +1,72 @@
+﻿@model PeopleViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form asp-action="Create" asp-controller="People" method="post">
+
+    <label asp-for="MyCreatePerson.FirstName">First Name</label><br>
+    <input asp-for="MyCreatePerson.FirstName" placeholder="required" />
+    <span asp-validation-for="MyCreatePerson.FirstName"></span><br>
+
+    <label asp-for="MyCreatePerson.LastName">Last Name</label><br>
+    <input asp-for="MyCreatePerson.LastName" placeholder="required" />
+    <span asp-validation-for="MyCreatePerson.LastName"></span><br>
+
+    <label asp-for="MyCreatePerson.CellphoneNumber">Mobile no.</label><br>
+    <input asp-for="MyCreatePerson.CellphoneNumber" />
+    <span asp-validation-for="MyCreatePerson.CellphoneNumber"></span><br>
+
+    <label asp-for="MyCreatePerson.CurrentCity">City</label><br>
+    <select asp-for="MyCreatePerson.CurrentCity">
+        <option value="" disabled>Select a City</option>
+        @foreach (string item in Model.MyCreatePerson.CurrentCityList)
+        {
+            <option value="@item">@item</option>
+        }
+    </select><br><br>
+
+    <button style="margin-right: 20px">Add</button>
+    <button type="reset">Reset</button>
+</form>
+
+
+<hr />
+<br />
+
+
+<form asp-action="Index" method="post">
+    <label asp-for="MyPersonViewModel.FilterText">Find a person</label>
+    <input asp-for="MyPersonViewModel.FilterText" />
+    <input type="submit" value="Search" />
+</form>
+<br />
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="row">
+            <div class="col-3">
+                <h5>First Name</h5>
+            </div>
+
+            <div class="col-3">
+                <h5>Last Name</h5>
+            </div>
+
+            <div class="col-2">
+                <h5> City</h5>
+            </div>
+
+            <div class="col-2">
+                <h5>Mobile nr.</h5>
+            </div>
+        </div>
+
+
+        @foreach (var item in Model.MyPersonViewModel.PersonList)
+        {
+            <partial name="../Shared/_PersonPartialView.cshtml" model="item" />
+        }
+    </div>
+</div> 

@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <br />
+    <br />
+
+    <a asp-area="" asp-controller="People" asp-action="Index">Normal controller people list</a>
+
+    <br />
+    <br />
+
+    <a asp-area="" asp-controller="AjaxPeople" asp-action="Index">Ajax controller people list</a>
+</div>
