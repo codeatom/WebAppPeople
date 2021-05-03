@@ -18,21 +18,11 @@ namespace WebAppPeople.Controllers
         }
 
         [HttpGet]
-        public IActionResult DisplayPeople()
-        {
-            List<Person> persons = _peopleService.All().PersonList;
-
-            if (persons.Count != 0)
-            {
-                return PartialView("_PeoplePartialView", _peopleService.All().PersonList);
-            }
-
-            return Ok("There is no person in the list");  
-        }
-
-        [HttpPost]
         public IActionResult DisplayPerson(int id)
         {
+            ViewData["ShowPersonEditButton"] = false;
+            ViewData["ShowPersonRemoveButton"] = false;
+
             Person person = _peopleService.FindById(id);
 
             if (person != null)
@@ -41,6 +31,22 @@ namespace WebAppPeople.Controllers
             }
 
             return Ok("There is no person with id " + id);
+        }
+
+        [HttpPost]
+        public IActionResult DisplayPeople()
+        {
+            ViewData["ShowPersonEditButton"] = false;
+            ViewData["ShowPersonRemoveButton"] = false;
+
+            List<Person> persons = _peopleService.All().PersonList;
+
+            if (persons.Count != 0)
+            {
+                return PartialView("_PeoplePartialView", _peopleService.All().PersonList);
+            }
+
+            return Ok("There is no person in the list");  
         }
 
         [HttpPost]
@@ -56,5 +62,6 @@ namespace WebAppPeople.Controllers
 
             return Ok("There is no person with id " + id);
         }
+
     }
 }

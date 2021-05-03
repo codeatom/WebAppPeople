@@ -16,6 +16,9 @@ namespace WebAppPeople.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["ShowPersonEditButton"] = true;
+            ViewData["ShowPersonRemoveButton"] = true;
+
             PeopleViewModel peopleViewModel = new PeopleViewModel();
             peopleViewModel.MyPersonViewModel = _peopleService.All();
 

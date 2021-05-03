@@ -9,15 +9,8 @@ personBtnElement.addEventListener("click", DisplayPerson);
 removeBtnElement.addEventListener("click", RemovePerson);
 
 
-function DisplayPeople() {
-    $.get("AjaxPeople/DisplayPeople", function (data, status) {
-        console.log("Data: " + data + "\nStatus: " + status);
-        resultDiv.innerHTML = data;
-    });
-}
-
 function DisplayPerson() {
-    $.post("AjaxPeople/DisplayPerson",
+    $.get("AjaxPeople/DisplayPerson",
         {
             id: searchIdInputElement.value
         },
@@ -27,6 +20,14 @@ function DisplayPerson() {
         });
 }
 
+function DisplayPeople() {
+    $.post("AjaxPeople/DisplayPeople",
+        function (data, status) {
+        console.log("Data: " + data + "\nStatus: " + status);
+        resultDiv.innerHTML = data;
+    });
+}
+
 function RemovePerson() {
     $.post("AjaxPeople/RemovePerson",
         {
@@ -34,6 +35,6 @@ function RemovePerson() {
         },
         function (data, status) {
             console.log("Data: " + data + "\nStatus: " + status);
-                resultDiv.innerHTML = data;
+            resultDiv.innerHTML = data;
         });
 }
